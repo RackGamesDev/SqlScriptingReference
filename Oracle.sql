@@ -60,7 +60,8 @@ TRUNCATE TABLE TELEFONO; --Borra todos los entrys de una tabla pero no la tabla
 
 SELECT * FROM TELEFONO; --Devuelve todos los entrys de la tabla con todas las columnas
 SELECT * FROM TELEFONO WHERE prefijo = '+52'; --Devuelve todos los entrys de la tabla en base a ciertas condiciones (similar a update, AND y OR tambien funcionarian) (< > >= <= != <>)
-SELECT numero FROM USUARIO WHERE numero = 2 * (numero - 1); --Se pueden hacer operaciones en cualquier parte del select con los datos
+SELECT numero * 10 FROM USUARIO WHERE numero = 2 * (numero - 1); --Se pueden hacer operaciones en cualquier parte del select con los datos (+ - / * POWER(a, b) MOD(a, b) SQRT(x)...)
+SELECT nombre || ' asdf' FROM USUARIO; --Se usa || para concatenar varchars
 SELECT * FROM TELEFONO WHERE prefijo IN ('+52', '+34'); --Devuelve los entrys donde x valor sea igual a alguno de esos valores 
 SELECT * FROM TELEFONO WHERE numero BETWEEN 0 AND 5; --Devuelve los entrys donde ese valor numerico este entre esos dos numeros
 SELECT * FROM TELEFONO WHERE prefijo IS NOT NULL; --Filtra para ver solo los que no son nulos, tambien se puede hacer solo con los nulos
@@ -82,7 +83,9 @@ SELECT * FROM TELEFONO WHERE REGEXP_SUBSTR(numero, '^\d{3}') = '123'; --Tambien 
 SELECT * FROM TELEFONO WHERE REGEXP_SUBSTR(numero, '\d{3}', 3, 2, 'i') = '789'; --El tercer parametru representa a partir de que caracter se va a evaluar, el cuarto que ocurrencia cogera (en este caso la segunda), el quinto dependiendo de la letra evalua de maneras distintas (i=case insensitive)
 SELECT numero * 10 AS "numero por diez" FROM USUARIO; --Se puede operar con los valores a mostrar
 SELECT ABS(numero) FROM USUARIO; --Siempre devuelve numeros positivos
-SELECT ROUND(numero, 2) FROM USUARIO; --Redondea un numero, el 2 es que redondea a partir de la segunda cifra (29.54 = 30)
+SELECT ROUND(numero, 2) FROM USUARIO; --Redondea un numero para arriba o para abajo, el 2 es la cantidad de decimales que se salvan
+SELECT TRUNC(numero, 2) FROM USUARIO; --Trunca un numero (eliminar decimales), dependiendo del sistema gestor esto puede ser TRUNCATE
+SELECT LENGTH(nombre) FROM USUARIO; --Devuelve la longitud de un varchar, dependiendo del sistema gestor esto puede ser LEN
 
 --SELECT * FROM USUARIO,TELEFONO; --Devuelve todas las combinaciones posibles con los registros de ambas tablas, NO RECOMENDADO
 SELECT USUARIO.nombre, CASA.id FROM USUARIO, CASA WHERE CASA.uuid_USUARIO = USUARIO.uuid; --Seleccionando datos de dos tablas ya que estas tienen una relacion
